@@ -1,4 +1,4 @@
-def part_one(input_data):
+def part_one(input_data) -> int:
    
     l = []
     r = []
@@ -17,7 +17,7 @@ def part_one(input_data):
         
     return(sum)
 
-def part_two(input_data):
+def part_two(input_data) -> int:
 
     l = []
     r = []
