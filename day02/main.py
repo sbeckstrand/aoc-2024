@@ -43,7 +43,6 @@ def part_two(input_data) -> int:
             levels_copy.pop(index)
 
             diffs = get_diffs(levels_copy)
-            print(levels_copy)
             if is_safe(diffs):
                 safe_count += 1
                 break
