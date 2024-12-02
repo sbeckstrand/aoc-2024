@@ -36,7 +36,7 @@ def part_two(input_data) -> int:
         diffs = get_diffs(levels)
         if is_safe(diffs):
             safe_count += 1
-            break
+            continue
 
         for index, _ in enumerate(levels):
             levels_copy = levels.copy()
