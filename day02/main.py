@@ -4,8 +4,10 @@ def is_safe(diffs: list[int]) -> bool:
         return True
     
 def get_diffs(levels: list[int]) -> list[int]:
+    
     curr = levels[0]
     diffs = []
+    
     for level in levels[1:]:
         diff = int(level) - int(curr)
         diffs.append(diff)
@@ -28,6 +30,7 @@ def part_one(input_data) -> int:
     return safe_count
 
 def part_two(input_data) -> int:
+    
     safe_count = 0
 
     for line in input_data.split("\n"):
