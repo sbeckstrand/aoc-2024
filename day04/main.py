@@ -1,5 +1,5 @@
 # Build 2D array from input data
-def build_map(input_data):
+def build_map(input_data: str) -> list[list[str]]:
 
     map = []
 
@@ -9,7 +9,7 @@ def build_map(input_data):
     return map
 
 # Check if word in is in map given a direction and a starting point
-def check_direction(map, word, direction, start):
+def check_direction(map: list[list[str]], word: str, direction: tuple, start: tuple) -> bool:
 
     x, y = direction
     row, col = start
@@ -27,7 +27,7 @@ def check_direction(map, word, direction, start):
     return True
 
 # Check if there is an X shape spelling MAS in both diagnol directions
-def check_xmas(map, start):
+def check_xmas(map: list[list[str]], start: tuple) -> bool:
 
     row, col = start
     direction = [(-1, -1), (1, -1), (-1, 1), (1, 1)]
