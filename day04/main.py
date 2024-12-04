@@ -9,7 +9,7 @@ def build_map(input_data: str) -> list[list[str]]:
     return map
 
 # Check if word in is in map given a direction and a starting point
-def check_direction(map: list[list[str]], word: str, direction: tuple, start: tuple) -> bool:
+def check_direction(map: list[list[str]], word: str, direction: tuple[int, int], start: tuple[int, int]) -> bool:
 
     x, y = direction
     row, col = start
@@ -27,7 +27,7 @@ def check_direction(map: list[list[str]], word: str, direction: tuple, start: tu
     return True
 
 # Check if there is an X shape spelling MAS in both diagnol directions
-def check_xmas(map: list[list[str]], start: tuple) -> bool:
+def check_xmas(map: list[list[str]], start: tuple[int, int]) -> bool:
 
     row, col = start
     direction = [(-1, -1), (1, -1), (-1, 1), (1, 1)]
@@ -47,16 +47,16 @@ def check_xmas(map: list[list[str]], start: tuple) -> bool:
 
 def part_one(map: list[list[str]], input_data: str) -> int:
 
-    word = "XMAS"
+    WORD = "XMAS"
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
     total = 0
 
     for row_idx, row in enumerate(map):
         for cell_idx, cell in enumerate(row):
-            if cell == word[0]:
+            if cell == WORD[0]:
                 start = (row_idx, cell_idx)
                 for x, y in directions:
-                    if check_direction(map, word, (x, y), start):
+                    if check_direction(map, WORD, (x, y), start):
                         total += 1
 
     return total
