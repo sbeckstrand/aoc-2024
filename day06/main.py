@@ -35,31 +35,28 @@ def traverse_grid(start: tuple[int, int], obstacles: list[tuple[int, int]], og_g
     while not exited:
         
         next = (current[0] + DIRECTIONS[direction]["x_y"][0], current[1] + DIRECTIONS[direction]["x_y"][1])
-        try:
-            if (current, direction) not in visited:
-                visited.add((current, direction))
-            if next[0] < 0 or next[0] >= len(grid[0]) or next[1] < 0 or next[1] >= len(grid):
-                exited = True
-            elif grid[next[1]][next[0]] == "#":
-                direction = DIRECTIONS[direction]["right"]
-                if loopCheck:
-                    check_next = (current[0] + DIRECTIONS[direction]["x_y"][0], current[1] + DIRECTIONS[direction]["x_y"][1])
-                    if (check_next, direction) in visited:
-                        return False, len(visited), len(loop_points)
-            else:            
-                if not loopCheck:
-                    loop_grid = deepcopy(og_grid)
-                    loop_grid[next[1]][next[0]] = "#"
-                    loop_exited, _, _ = traverse_grid(start, obstacles, loop_grid, True)
-                    if not loop_exited:
-                        grid[next[1]][next[0]] = "O"
-                        loop_points.add(next)
-                if grid[next[1]][next[0]] != "O" and grid[current[1]][current[0]] != "O":
-                    grid[current[1]][current[0]] = "X"
-                    grid[next[1]][next[0]] = direction
-                current = next
-        except IndexError as e:
+        if (current, direction) not in visited:
+            visited.add((current, direction))
+        if next[0] < 0 or next[0] >= len(grid[0]) or next[1] < 0 or next[1] >= len(grid):
             exited = True
+        elif grid[next[1]][next[0]] == "#":
+            direction = DIRECTIONS[direction]["right"]
+            if loopCheck:
+                check_next = (current[0] + DIRECTIONS[direction]["x_y"][0], current[1] + DIRECTIONS[direction]["x_y"][1])
+                if (check_next, direction) in visited:
+                    return False, len(visited), len(loop_points)
+        else:            
+            if not loopCheck:
+                loop_grid = deepcopy(og_grid)
+                loop_grid[next[1]][next[0]] = "#"
+                loop_exited, _, _ = traverse_grid(start, obstacles, loop_grid, True)
+                if not loop_exited:
+                    grid[next[1]][next[0]] = "O"
+                    loop_points.add(next)
+            if grid[next[1]][next[0]] != "O" and grid[current[1]][current[0]] != "O":
+                grid[current[1]][current[0]] = "X"
+                grid[next[1]][next[0]] = direction
+            current = next
 
     return True, len(visited), len(loop_points)
 
