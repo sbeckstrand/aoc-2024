@@ -25,6 +25,7 @@ def build_grid(input: str) -> tuple[tuple[tuple[int, int], str], list[tuple[int,
     return (start, obstacles, grid)
 
 def traverse_grid(start: tuple[int, int], obstacles: list[tuple[int, int]], og_grid: list[list[str]], loopCheck: bool) -> tuple[bool, int, int]:
+    
     grid = deepcopy(og_grid)
     visited = set()
     exited = False
@@ -38,6 +39,7 @@ def traverse_grid(start: tuple[int, int], obstacles: list[tuple[int, int]], og_g
         visit = (current, direction) if loopCheck else current
         if visit not in visited:
             visited.add(visit)
+        
         if next[0] < 0 or next[0] >= len(grid[0]) or next[1] < 0 or next[1] >= len(grid):
             exited = True
         elif grid[next[1]][next[0]] == "#":
